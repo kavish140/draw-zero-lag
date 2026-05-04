@@ -1,0 +1,100 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-arcade-black: var(--arcade-black);
+  --color-arcade-indigo: var(--arcade-indigo);
+  --color-neon-magenta: var(--neon-magenta);
+  --color-neon-lime: var(--neon-lime);
+  --color-neon-cyan: var(--neon-cyan);
+  --color-candy-orange: var(--candy-orange);
+  --font-display: "Titan One", system-ui, sans-serif;
+  --font-sans: "Rubik", system-ui, sans-serif;
+}
+
+:root {
+  --radius: 1rem;
+  --arcade-black: oklch(0.13 0.05 300);
+  --arcade-indigo: oklch(0.22 0.1 295);
+  --neon-magenta: oklch(0.65 0.32 350);
+  --neon-lime: oklch(0.92 0.25 125);
+  --neon-cyan: oklch(0.86 0.18 200);
+  --candy-orange: oklch(0.72 0.21 45);
+
+  --background: var(--arcade-black);
+  --foreground: oklch(0.98 0 0);
+  --card: var(--arcade-indigo);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: var(--arcade-indigo);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: var(--neon-magenta);
+  --primary-foreground: oklch(0.13 0.05 300);
+  --secondary: oklch(0.3 0.1 295);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.25 0.08 295);
+  --muted-foreground: oklch(0.75 0.05 295);
+  --accent: var(--neon-cyan);
+  --accent-foreground: oklch(0.13 0.05 300);
+  --destructive: oklch(0.65 0.28 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 12%);
+  --ring: var(--neon-magenta);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+  html, body {
+    background: radial-gradient(ellipse at top, oklch(0.2 0.12 295) 0%, var(--arcade-black) 60%);
+    color: var(--color-foreground);
+    min-height: 100dvh;
+  }
+  body { font-family: var(--font-sans); }
+}
+
+@layer utilities {
+  .font-display { font-family: var(--font-display); font-style: italic; letter-spacing: 0.01em; }
+  .arcade-btn {
+    @apply relative font-bold uppercase tracking-wider rounded-2xl transition-all duration-100;
+    box-shadow: 0 6px 0 0 rgba(0,0,0,0.4);
+  }
+  .arcade-btn:active { transform: translateY(4px); box-shadow: 0 2px 0 0 rgba(0,0,0,0.4); }
+  .glass {
+    background: color-mix(in oklab, var(--arcade-indigo) 80%, transparent);
+    backdrop-filter: blur(12px);
+    border: 2px solid color-mix(in oklab, white 8%, transparent);
+  }
+  .neon-glow-magenta { box-shadow: 0 0 20px color-mix(in oklab, var(--neon-magenta) 60%, transparent); }
+  .neon-glow-cyan { box-shadow: 0 0 20px color-mix(in oklab, var(--neon-cyan) 50%, transparent); }
+  .neon-glow-lime { box-shadow: 0 0 20px color-mix(in oklab, var(--neon-lime) 50%, transparent); }
+}
