@@ -4,7 +4,7 @@ import type { RealtimeChannel } from "@supabase/supabase-js";
 import type { Player, ChatMessage, RoundState } from "@/lib/gameTypes";
 import type { DrawAction } from "@/components/DrawCanvas";
 import { pickWords, maskWord, WORDS } from "@/lib/words";
-import { uuid } from "@/lib/utils";
+import { generateUUID } from "@/lib/uuid";
 
 export type RoomEvent =
   | { kind: "draw"; action: DrawAction; from: string }
@@ -155,7 +155,7 @@ export function useRoom(opts: {
         };
 
         const correctMsg: ChatMessage = {
-          id: uuid(),
+          id: generateUUID(),
           playerId: "system",
           playerName: "system",
           text: `${me.name} guessed the word! +${points}`,
@@ -180,7 +180,7 @@ export function useRoom(opts: {
       // Close guess (off by 1-2 chars)
       if (closeGuess(guess, target)) {
         const closeMsg: ChatMessage = {
-          id: uuid(),
+          id: generateUUID(),
           playerId: me.id,
           playerName: me.name,
           text: `${t}  (close!)`,
@@ -194,7 +194,7 @@ export function useRoom(opts: {
     }
 
     const msg: ChatMessage = {
-      id: uuid(),
+      id: generateUUID(),
       playerId: me.id,
       playerName: me.name,
       text: t,
