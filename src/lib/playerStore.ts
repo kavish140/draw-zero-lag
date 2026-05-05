@@ -1,3 +1,5 @@
+import { generateUUID } from "./uuid";
+
 const KEY = "pictionary_player";
 export type StoredPlayer = { id: string; name: string; color: string };
 
@@ -10,7 +12,7 @@ export function getOrCreatePlayer(name?: string): StoredPlayer {
     try { return JSON.parse(raw); } catch { /* ignore */ }
   }
   const player: StoredPlayer = {
-    id: crypto.randomUUID(),
+    id: generateUUID(),
     name: name || `Player${Math.floor(Math.random() * 999)}`,
     color: COLORS[Math.floor(Math.random() * COLORS.length)],
   };

@@ -1,5 +1,6 @@
 import { useEffect, useImperativeHandle, useRef, forwardRef, useCallback } from "react";
 import { floodFill } from "@/lib/floodFill";
+import { generateUUID } from "@/lib/uuid";
 
 export type Tool = "brush" | "eraser" | "fill";
 export type DrawAction =
@@ -205,11 +206,11 @@ export const DrawCanvas = forwardRef<CanvasHandle, Props>(function DrawCanvas(
     if (tool === "fill") {
       floodFill(ctx, p.x, p.y, color);
       pushHistory();
-      onAction?.({ type: "fill", id: crypto.randomUUID(), x: p.x, y: p.y, color });
+      onAction?.({ type: "fill", id: generateUUID(), x: p.x, y: p.y, color });
       return;
     }
     drawingRef.current = true;
-    currentIdRef.current = crypto.randomUUID();
+    currentIdRef.current = generateUUID();
     lastPointRef.current = p;
     applyStrokePoint(ctx, null, p, color, size, tool === "eraser" ? "erase" : "draw");
     onAction?.({ type: "begin", id: currentIdRef.current, x: p.x, y: p.y, color, size, tool });
