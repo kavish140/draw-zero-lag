@@ -55,7 +55,7 @@ function DefaultErrorComponent({ error, reset }: { error: Error; reset: () => vo
 }
 
 export const getRouter = () => {
-  const history = createHashHistory();
+  const history = typeof window !== "undefined" ? createHashHistory() : undefined;
 
   const router = createRouter({
     routeTree,

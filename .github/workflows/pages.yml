@@ -41,13 +41,13 @@ jobs:
 
       - name: Add CNAME for custom domain
         run: |
-          mkdir -p dist
-          echo "pictionary.aismartkit.tech" > dist/CNAME
+          mkdir -p dist/client
+          echo "pictionary.aismartkit.tech" > dist/client/CNAME
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist
+          path: dist/client
 
   deploy:
     needs: build

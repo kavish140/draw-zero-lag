@@ -7,7 +7,26 @@
 import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 
 export default defineConfig({
+	cloudflare: false,
+	tanstackStart: {
+		prerender: {
+			enabled: true,
+			crawlLinks: true,
+		},
+	},
 	vite: {
 		base: "./",
+		environments: {
+			server: {
+				build: {
+					rollupOptions: {
+						input: "src/server.ts",
+					},
+					rolldownOptions: {
+						input: "src/server.ts",
+					},
+				},
+			},
+		},
 	},
 });
